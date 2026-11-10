@@ -102,10 +102,10 @@
             <!-- Action Controls -->
             <div class="flex items-center space-x-2">
                 <!-- Theme Switcher -->
-                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme">
+                <!-- <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme">
                     <span class="material-icons-outlined text-xl dark:hidden">dark_mode</span>
                     <span class="material-icons-outlined text-xl hidden dark:block">light_mode</span>
-                </button>
+                </button> -->
 
                 <!-- Download Zip Button -->
                 
@@ -179,83 +179,176 @@
             </div>
         </section>
 
-        <!-- ================= ABOUT PAGE ================= -->
-        <section id="page-about" class="page-content hidden space-y-10">
-            <div class="max-w-3xl">
-                <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">About The Laboratory</h1>
-                <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
-                    This space functions as my autonomous software engineering lab. It bridges theoretical computer science concepts with hands-on system building.
-                </p>
+      <!-- ================= ABOUT PAGE ================= -->
+<section id="page-about" class="page-content hidden space-y-12">
+
+    <!-- Hero: Text + Animated SVG -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        
+        <!-- Left: Title + Description -->
+        <div class="max-w-2xl">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-slate-900 dark:text-white mb-5 leading-tight">
+                About The Laboratory
+            </h1>
+            <p class="text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed">
+                This lab is for exploring, commenting on, and refining various thought experiments, belief systems, learnings, and the laws of science and engineering.
+            </p>
+        </div>
+
+        <!-- Right: Animated Ideas SVG -->
+        <div class="relative flex justify-center lg:justify-end">
+            <div class="relative w-full max-w-md aspect-square">
+                <!-- Soft background glow -->
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-indigo-500/5 to-emerald-500/10 rounded-full blur-3xl"></div>
+                
+                <svg viewBox="0 0 400 400" class="w-full h-full relative z-10" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Connecting lines (subtle) -->
+                    <g stroke="currentColor" class="text-slate-500/30 dark:text-slate-400/20" stroke-width="1.2" fill="none">
+                        <line x1="200" y1="80" x2="120" y2="160" class="animate-pulse" style="animation-duration: 4s;" />
+                        <line x1="200" y1="80" x2="280" y2="160" class="animate-pulse" style="animation-duration: 5s;" />
+                        <line x1="120" y1="160" x2="200" y2="240" class="animate-pulse" style="animation-duration: 4.5s;" />
+                        <line x1="280" y1="160" x2="200" y2="240" class="animate-pulse" style="animation-duration: 3.8s;" />
+                        <line x1="120" y1="160" x2="80" y2="280" />
+                        <line x1="280" y1="160" x2="320" y2="280" />
+                        <line x1="200" y1="240" x2="140" y2="320" />
+                        <line x1="200" y1="240" x2="260" y2="320" />
+                    </g>
+
+                    <!-- Central core (idea nucleus) -->
+                    <circle cx="200" cy="200" r="28" class="fill-blue-500/20 dark:fill-blue-400/20 stroke-blue-500 dark:stroke-blue-400" stroke-width="2">
+                        <animate attributeName="r" values="26;30;26" dur="3s" repeatCount="indefinite" />
+                    </circle>
+                    <circle cx="200" cy="200" r="12" class="fill-blue-500 dark:fill-blue-400">
+                        <animate attributeName="opacity" values="0.8;1;0.8" dur="2.5s" repeatCount="indefinite" />
+                    </circle>
+
+                    <!-- Orbiting idea nodes -->
+                    <!-- Node 1 - Thought -->
+                    <g class="animate-[float_6s_ease-in-out_infinite]">
+                        <circle cx="120" cy="160" r="18" class="fill-indigo-500/15 dark:fill-indigo-400/20 stroke-indigo-500 dark:stroke-indigo-400" stroke-width="1.5"/>
+                        <text x="120" y="165" text-anchor="middle" class="fill-indigo-600 dark:fill-indigo-300 text-[11px] font-medium">💭</text>
+                    </g>
+
+                    <!-- Node 2 - Science -->
+                    <g class="animate-[float_7s_ease-in-out_infinite]" style="animation-delay: 0.5s;">
+                        <circle cx="280" cy="160" r="18" class="fill-emerald-500/15 dark:fill-emerald-400/20 stroke-emerald-500 dark:stroke-emerald-400" stroke-width="1.5"/>
+                        <text x="280" y="165" text-anchor="middle" class="fill-emerald-600 dark:fill-emerald-300 text-[11px] font-medium">⚛</text>
+                    </g>
+
+                    <!-- Node 3 - Engineering -->
+                    <g class="animate-[float_5.5s_ease-in-out_infinite]" style="animation-delay: 1s;">
+                        <circle cx="80" cy="280" r="16" class="fill-amber-500/15 dark:fill-amber-400/20 stroke-amber-500 dark:stroke-amber-400" stroke-width="1.5"/>
+                        <text x="80" y="285" text-anchor="middle" class="fill-amber-600 dark:fill-amber-300 text-[10px] font-medium">⚙</text>
+                    </g>
+
+                    <!-- Node 4 - Belief / Philosophy -->
+                    <g class="animate-[float_6.5s_ease-in-out_infinite]" style="animation-delay: 0.8s;">
+                        <circle cx="320" cy="280" r="16" class="fill-violet-500/15 dark:fill-violet-400/20 stroke-violet-500 dark:stroke-violet-400" stroke-width="1.5"/>
+                        <text x="320" y="285" text-anchor="middle" class="fill-violet-600 dark:fill-violet-300 text-[10px] font-medium">☯</text>
+                    </g>
+
+                    <!-- Node 5 - Learning -->
+                    <g class="animate-[float_5s_ease-in-out_infinite]" style="animation-delay: 1.2s;">
+                        <circle cx="140" cy="320" r="15" class="fill-sky-500/15 dark:fill-sky-400/20 stroke-sky-500 dark:stroke-sky-400" stroke-width="1.5"/>
+                        <text x="140" y="325" text-anchor="middle" class="fill-sky-600 dark:fill-sky-300 text-[10px] font-medium">📖</text>
+                    </g>
+
+                    <!-- Node 6 - Exploration -->
+                    <g class="animate-[float_6.2s_ease-in-out_infinite]" style="animation-delay: 0.3s;">
+                        <circle cx="260" cy="320" r="15" class="fill-rose-500/15 dark:fill-rose-400/20 stroke-rose-500 dark:stroke-rose-400" stroke-width="1.5"/>
+                        <text x="260" y="325" text-anchor="middle" class="fill-rose-600 dark:fill-rose-300 text-[10px] font-medium">🔭</text>
+                    </g>
+
+                    <!-- Top idea node -->
+                    <g class="animate-[float_5.8s_ease-in-out_infinite]" style="animation-delay: 0.7s;">
+                        <circle cx="200" cy="80" r="20" class="fill-blue-500/20 dark:fill-blue-400/25 stroke-blue-500 dark:stroke-blue-400" stroke-width="1.5"/>
+                        <text x="200" y="86" text-anchor="middle" class="fill-blue-600 dark:fill-blue-300 text-[13px] font-medium">💡</text>
+                    </g>
+                </svg>
             </div>
+        </div>
+    </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div class="bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
-                    <div class="flex items-center space-x-3 text-google-blue">
-                        <span class="material-icons-outlined text-2xl">psychology</span>
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Research Focus</h2>
-                    </div>
-                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
-                        <li class="flex items-center space-x-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-google-blue"></span>
-                            <span>Distributed Systems & High-Throughput APIs</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-google-blue"></span>
-                            <span>Full-Stack Web Architectures & Micro-frontends</span>
-                        </li>
-                        <li class="flex items-center space-x-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-google-blue"></span>
-                            <span>Database Optimization & Indexing Strategies</span>
-                        </li>
-                    </ul>
-                </div>
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <!-- Purpose Card -->
+    <div class="group relative bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4 overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:border-google-blue/70 hover:shadow-[0_16px_40px_-12px_rgba(66,133,244,0.35)]">
+        <span class="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-google-blue origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"></span>
+        <div class="flex items-center space-x-3">
+            <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-google-blue/10 text-google-blue transition-all duration-300 group-hover:bg-google-blue group-hover:text-white group-hover:scale-105">
+                <span class="material-icons-outlined text-2xl">psychology</span>
+            </span>
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white transition-colors duration-300 group-hover:text-google-blue">Purpose</h2>
+        </div>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-700 dark:group-hover:text-slate-300">
+            A space to examine ideas rigorously — from scientific laws and engineering principles to belief systems and mental models. The goal is clear thinking, not dogma.
+        </p>
+        <ul class="space-y-2.5 text-sm text-slate-600 dark:text-slate-400 pt-1">
+            <li class="flex items-start space-x-2 transition-transform duration-300 group-hover:translate-x-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-google-blue mt-1.5 flex-shrink-0 transition-transform duration-300 group-hover:scale-150"></span>
+                <span>Thought experiments &amp; first principles</span>
+            </li>
+            <li class="flex items-start space-x-2 transition-transform duration-300 delay-75 group-hover:translate-x-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-google-blue mt-1.5 flex-shrink-0 transition-transform duration-300 delay-75 group-hover:scale-150"></span>
+                <span>Laws of science &amp; engineering</span>
+            </li>
+            <li class="flex items-start space-x-2 transition-transform duration-300 delay-100 group-hover:translate-x-0.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-google-blue mt-1.5 flex-shrink-0 transition-transform duration-300 delay-100 group-hover:scale-150"></span>
+                <span>Belief systems &amp; mental models</span>
+            </li>
+        </ul>
+    </div>
 
-                <div class="bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
-                    <div class="flex items-center space-x-3 text-emerald-600">
-                        <span class="material-icons-outlined text-2xl">terminal</span>
-                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Lab Stack</h2>
-                    </div>
-                    <div class="flex flex-wrap gap-2 text-xs font-medium">
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Node.js / Express</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">MongoDB / Mongoose</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Angular / Tailwind</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Docker / Render</span>
-                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Python / Data Pipes</span>
-                    </div>
-                </div>
-            </div>
+    <!-- Mission Card -->
+    <div class="group relative bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4 overflow-hidden transition-all duration-300 ease-out hover:-translate-y-1 hover:border-emerald-500/70 hover:shadow-[0_16px_40px_-12px_rgba(16,185,129,0.35)]">
+        <span class="pointer-events-none absolute inset-x-0 top-0 h-0.5 bg-emerald-500 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500 ease-out"></span>
+        <div class="flex items-center space-x-3">
+            <span class="flex items-center justify-center w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-600 transition-all duration-300 group-hover:bg-emerald-500 group-hover:text-white group-hover:scale-105">
+                <span class="material-icons-outlined text-2xl">volunteer_activism</span>
+            </span>
+            <h2 class="text-lg font-bold text-slate-900 dark:text-white transition-colors duration-300 group-hover:text-emerald-500">Mission</h2>
+        </div>
+        <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed transition-colors duration-300 group-hover:text-slate-700 dark:group-hover:text-slate-300">
+            Built to serve humanity and fellow seekers. Whatever I understand, I aim to share clearly — so others can build on it, challenge it, or use it.
+        </p>
+        <div class="pt-1">
+            <p class="text-sm text-slate-600 dark:text-slate-400 italic border-l-2 border-emerald-500/40 pl-3 transition-all duration-300 group-hover:border-emerald-500 group-hover:text-slate-700 dark:group-hover:text-slate-300">
+                “Contribute what you know. Leave the rest open for others to improve.”
+            </p>
+        </div>
+    </div>
+</div>
 
-            <!-- Send Inquiry Form -->
-            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6">
+    <!-- Inquiry Form -->
+    <div class="bg-slate-100 dark:bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6">
+        <div>
+            <h2 class="text-xl font-bold text-slate-900 dark:text-white">Submit a Lab Inquiry</h2>
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Have questions regarding research, collaboration, or tools? Send a direct dispatch.</p>
+        </div>
+        <form id="inquiry-form" onsubmit="submitInquiry(event)" class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Submit a Lab Inquiry</h2>
-                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Have questions regarding research, collaboration, or tools? Send a direct dispatch.</p>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Your Name</label>
+                    <input type="text" id="inq-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
                 </div>
-                <form id="inquiry-form" onsubmit="submitInquiry(event)" class="space-y-4">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Your Name</label>
-                            <input type="text" id="inq-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
-                        </div>
-                        <div>
-                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Email Address</label>
-                            <input type="email" id="inq-email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Subject</label>
-                        <input type="text" id="inq-subject" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Message</label>
-                        <textarea id="inq-message" rows="4" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white"></textarea>
-                    </div>
-                    <button type="submit" class="bg-google-blue hover:bg-google-blueHover text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md">
-                        Send Dispatch
-                    </button>
-                </form>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Email Address</label>
+                    <input type="email" id="inq-email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
+                </div>
             </div>
-        </section>
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Subject</label>
+                <input type="text" id="inq-subject" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
+            </div>
+            <div>
+                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Message</label>
+                <textarea id="inq-message" rows="4" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white"></textarea>
+            </div>
+            <button type="submit" class="bg-google-blue hover:bg-google-blueHover text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md">
+                Send Dispatch
+            </button>
+        </form>
+    </div>
+</section>
 
         <!-- ================= PRODUCTS PAGE ================= -->
         <section id="page-products" class="page-content hidden space-y-6">
