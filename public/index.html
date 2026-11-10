@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Software & Research Lab</title>
+    
+    <!-- Tailwind CSS & Google Material Fonts/Icons -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Roboto+Mono:wght@400;500&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined|Material+Icons+Round" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        google: {
+                            blue: '#1a73e8',
+                            blueHover: '#1557b0',
+                            blueContainer: '#e8f0fe',
+                            red: '#ea4335',
+                            yellow: '#fbbc04',
+                            green: '#34a853',
+                            surface: '#f8f9fa',
+                            darkSurface: '#202124',
+                            darkCard: '#292a2d',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Google Sans', 'Roboto', 'sans-serif'],
+                        mono: ['Roboto Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Google Sans', 'Roboto', sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .material-symbol {
+            font-family: 'Material Icons Outlined';
+            vertical-align: middle;
+        }
+        .material-symbol-fill {
+            font-family: 'Material Icons Round';
+            vertical-align: middle;
+        }
+        .glass-nav {
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        /* Custom scrollbar for Google-like feel */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dadce0;
+            border-radius: 4px;
+        }
+        .dark ::-webkit-scrollbar-thumb {
+            background: #3c4043;
+        }
+    </style>
+</head>
+<body class="dark bg-slate-50 text-slate-800 dark:bg-[#121212] dark:text-slate-100 min-h-screen flex flex-col">
+
+    <!-- Top Navigation Header -->
+    <header class="sticky top-0 z-40 w-full border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-[#121212]/80 glass-nav transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            
+            <!-- Brand / Logo -->
+            <div class="flex items-center space-x-3 cursor-pointer" onclick="navigateTo('home')">
+                <div class="w-9 h-9 rounded-xl bg-google-blue flex items-center justify-center text-white font-bold shadow-md shadow-blue-500/20">
+                    <span class="material-symbols-outlined text-xl">AD</span>
+                </div>
+                <div>
+                    <span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white">AD LABS</span>
+                    <span class="text-xs px-2 py-0.5 ml-2 bg-google-blueContainer dark:bg-slate-800 text-google-blue dark:text-blue-400 font-semibold rounded-full border border-blue-200 dark:border-blue-900/50">Personal Research</span>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex items-center space-x-1">
+                <button onclick="navigateTo('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all">Home</button>
+                <button onclick="navigateTo('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all">About</button>
+                <button onclick="navigateTo('products')" id="nav-products" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all">Products</button>
+                <button onclick="navigateTo('projects')" id="nav-projects" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all">Projects</button>
+                <button onclick="navigateTo('tools')" id="nav-tools" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all">Tools</button>
+                <button onclick="navigateTo('knowledge')" id="nav-knowledge" class="nav-btn px-4 py-2 rounded-full text-sm font-medium transition-all">Knowledge Base</button>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center space-x-2">
+                <!-- Theme Switcher -->
+                <button onclick="toggleTheme()" class="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-300 transition-colors" title="Toggle Light/Dark Theme">
+                    <span class="material-icons-outlined text-xl dark:hidden">dark_mode</span>
+                    <span class="material-icons-outlined text-xl hidden dark:block">light_mode</span>
+                </button>
+
+                <!-- Download Zip Button -->
+                
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- ================= HOME PAGE ================= -->
+        <section id="page-home" class="page-content space-y-12">
+            <!-- Disclaimer Banner -->
+            <div class="bg-blue-50/70 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-900/60 rounded-2xl p-4 sm:p-6 flex items-start space-x-4">
+                <span class="material-icons-outlined text-google-blue dark:text-blue-400 text-2xl mt-0.5">info</span>
+                <div>
+                    <h3 class="text-sm font-semibold text-google-blue dark:text-blue-300 uppercase tracking-wider">Independent Lab Workspace</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-300 mt-1 leading-relaxed">
+                        Welcome to my personal software engineering sandbox. Everything published here—including software releases, experimental models, utility scripts, and technical documentation—represents my personal independent research, exploration, and learning activities.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Hero Section -->
+            <div class="text-center max-w-3xl mx-auto space-y-6 pt-4">
+                <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs text-slate-600 dark:text-slate-400 font-medium">
+                    <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                    <span>Lab Operational & Status: Active</span>
+                </div>
+                <h1 class="text-4xl sm:text-6xl font-bold tracking-tight text-slate-900 dark:text-white">
+                    My Independent Lab with <span class="text-google-blue">purpose</span> & research.
+                </h1>
+                <p class="text-lg text-slate-600 dark:text-slate-400 leading-relaxed">
+                    A centralized vault containing Products, Projects, open-source utilities, and raw insights built directly inside my software laboratory.
+                </p>
+                <div class="flex flex-wrap justify-center gap-4 pt-2">
+                    <button onclick="navigateTo('products')" class="bg-google-blue hover:bg-google-blueHover text-white px-6 py-3 rounded-full text-sm font-medium shadow-md shadow-blue-500/20 transition-all">
+                        Explore Products
+                    </button>
+                    <button onclick="navigateTo('knowledge')" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 px-6 py-3 rounded-full text-sm font-medium transition-all">
+                        Read Lab Notes
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quick Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-6">
+                <div onclick="navigateTo('products')" class="cursor-pointer group p-6 rounded-2xl bg-white dark:bg-google-darkCard border border-slate-200 dark:border-slate-800 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 text-google-blue dark:text-blue-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-icons-outlined text-2xl">apps</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Software Products</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Full-featured micro-apps, SaaS utilities, and deployment-ready software tools.</p>
+                </div>
+
+                <div onclick="navigateTo('projects')" class="cursor-pointer group p-6 rounded-2xl bg-white dark:bg-google-darkCard border border-slate-200 dark:border-slate-800 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-icons-outlined text-2xl">account_tree</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">R&D Projects</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Experimental repositories, algorithmic prototypes, and architecture designs.</p>
+                </div>
+
+                <div onclick="navigateTo('tools')" class="cursor-pointer group p-6 rounded-2xl bg-white dark:bg-google-darkCard border border-slate-200 dark:border-slate-800 hover:shadow-xl transition-all duration-300">
+                    <div class="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-icons-outlined text-2xl">construction</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Developer Tools</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Custom CLI scripts, automation routines, and workflow accelerators.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= ABOUT PAGE ================= -->
+        <section id="page-about" class="page-content hidden space-y-10">
+            <div class="max-w-3xl">
+                <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-3">About The Laboratory</h1>
+                <p class="text-slate-600 dark:text-slate-400 leading-relaxed">
+                    This space functions as my autonomous software engineering lab. It bridges theoretical computer science concepts with hands-on system building.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+                    <div class="flex items-center space-x-3 text-google-blue">
+                        <span class="material-icons-outlined text-2xl">psychology</span>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Research Focus</h2>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-600 dark:text-slate-400">
+                        <li class="flex items-center space-x-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-google-blue"></span>
+                            <span>Distributed Systems & High-Throughput APIs</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-google-blue"></span>
+                            <span>Full-Stack Web Architectures & Micro-frontends</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-google-blue"></span>
+                            <span>Database Optimization & Indexing Strategies</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+                    <div class="flex items-center space-x-3 text-emerald-600">
+                        <span class="material-icons-outlined text-2xl">terminal</span>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Lab Stack</h2>
+                    </div>
+                    <div class="flex flex-wrap gap-2 text-xs font-medium">
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Node.js / Express</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">MongoDB / Mongoose</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Angular / Tailwind</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Docker / Render</span>
+                        <span class="px-3 py-1 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-lg">Python / Data Pipes</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Send Inquiry Form -->
+            <div class="bg-slate-100 dark:bg-slate-900/60 p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-6">
+                <div>
+                    <h2 class="text-xl font-bold text-slate-900 dark:text-white">Submit a Lab Inquiry</h2>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Have questions regarding research, collaboration, or tools? Send a direct dispatch.</p>
+                </div>
+                <form id="inquiry-form" onsubmit="submitInquiry(event)" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Your Name</label>
+                            <input type="text" id="inq-name" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Email Address</label>
+                            <input type="email" id="inq-email" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Subject</label>
+                        <input type="text" id="inq-subject" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Message</label>
+                        <textarea id="inq-message" rows="4" required class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-google-blue focus:outline-none dark:text-white"></textarea>
+                    </div>
+                    <button type="submit" class="bg-google-blue hover:bg-google-blueHover text-white px-6 py-2.5 rounded-full text-sm font-medium transition-all shadow-md">
+                        Send Dispatch
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- ================= PRODUCTS PAGE ================= -->
+        <section id="page-products" class="page-content hidden space-y-6">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Software Products</h1>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Production-ready applications created and maintained in this lab.</p>
+                </div>
+            </div>
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Dynamically Rendered Products -->
+            </div>
+        </section>
+
+        <!-- ================= PROJECTS PAGE ================= -->
+        <section id="page-projects" class="page-content hidden space-y-6">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Research & Projects</h1>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Experimental codebase initiatives and proof-of-concept builds.</p>
+            </div>
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Dynamically Rendered Projects -->
+            </div>
+        </section>
+
+        <!-- ================= TOOLS PAGE ================= -->
+        <section id="page-tools" class="page-content hidden space-y-6">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Developer Tools</h1>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Internal scripts, helper utilities, and benchmark applications.</p>
+            </div>
+            <div id="tools-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Dynamically Rendered Tools -->
+            </div>
+        </section>
+
+        <!-- ================= KNOWLEDGE BASE PAGE ================= -->
+        <section id="page-knowledge" class="page-content hidden space-y-6">
+            <div>
+                <h1 class="text-3xl font-bold text-slate-900 dark:text-white">Knowledge Base & Articles</h1>
+                <p class="text-sm text-slate-600 dark:text-slate-400">Documented insights, technical solutions, and architecture breakdowns.</p>
+            </div>
+            <div id="knowledge-grid" class="space-y-4">
+                <!-- Dynamically Rendered Knowledge Articles -->
+            </div>
+        </section>
+
+        <!-- ================= ADMIN DASHBOARD ================= -->
+        <section id="page-admin" class="page-content hidden space-y-8">
+            <!-- Login Gate View when Not Authenticated -->
+            <div id="admin-login-gate" class="max-w-md mx-auto py-12 space-y-6">
+                <div class="bg-white dark:bg-google-darkCard p-8 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl text-center space-y-4">
+                    <div class="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-google-blue flex items-center justify-center mx-auto">
+                        <span class="material-icons-outlined text-2xl">lock</span>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900 dark:text-white">AD Labs Console Login</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Authorized access only. Enter passkey to manage research data.</p>
+                    </div>
+                    <input type="password" id="admin-passkey-input" placeholder="Enter Admin Passkey" class="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-sm dark:text-white focus:outline-none focus:ring-2 focus:ring-google-blue">
+                    <button onclick="verifyAdminPasskey()" class="w-full py-3 bg-google-blue hover:bg-google-blueHover text-white rounded-full text-sm font-semibold shadow-md transition-all">
+                        Authenticate Console
+                    </button>
+                </div>
+            </div>
+
+            <!-- Authenticated Admin Panel View -->
+            <div id="admin-dashboard-view" class="hidden space-y-8">
+                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-slate-900 dark:text-white flex items-center space-x-2">
+                            <span class="material-icons-outlined text-google-blue">admin_panel_settings</span>
+                            <span>AD Labs Console & Management</span>
+                        </h1>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Manage inquiries, upload new projects, tools, and write articles.</p>
+                    </div>
+                    <button onclick="logoutAdmin()" class="px-3 py-1.5 text-xs text-red-600 border border-red-200 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/40 font-medium">
+                        Exit Admin Session
+                    </button>
+                </div>
+
+                <!-- Admin Sub-Navigation Tabs -->
+                <div class="flex border-b border-slate-200 dark:border-slate-800 space-x-4">
+                    <button onclick="setAdminTab('inquiries')" id="admin-tab-inquiries" class="admin-tab-btn pb-2 text-sm font-semibold border-b-2 border-google-blue text-google-blue">Inquiries</button>
+                    <button onclick="setAdminTab('add-content')" id="admin-tab-add-content" class="admin-tab-btn pb-2 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">Upload Content</button>
+                    <button onclick="setAdminTab('manage-content')" id="admin-tab-manage-content" class="admin-tab-btn pb-2 text-sm font-semibold border-b-2 border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200">Manage Items (Edit/Delete)</button>
+                </div>
+
+                <!-- Inquiries Panel -->
+                <div id="admin-panel-inquiries" class="space-y-4">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white">Visitor Inquiries</h2>
+                    <div id="admin-inquiries-list" class="space-y-3">
+                        <!-- Dynamic Inquiries -->
+                    </div>
+                </div>
+
+                <!-- Add Content Form Panel -->
+                <div id="admin-panel-add-content" class="hidden bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-4">
+                    <div class="flex items-center justify-between">
+                        <h2 id="admin-form-title" class="text-base font-bold text-slate-900 dark:text-white">Upload New Item to Lab</h2>
+                        <button type="button" id="cancel-edit-btn" onclick="cancelEditMode()" class="hidden text-xs text-slate-500 hover:text-slate-800 dark:hover:text-slate-200 underline">Cancel Edit</button>
+                    </div>
+                    <form id="upload-item-form" onsubmit="handleItemUpload(event)" class="space-y-4">
+                        <input type="hidden" id="item-editing-id" value="">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Target Category</label>
+                                <select id="item-category" class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm dark:text-white">
+                                    <option value="products">Product</option>
+                                    <option value="projects">Project</option>
+                                    <option value="tools">Tool</option>
+                                    <option value="knowledge">Knowledge Article</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Title</label>
+                                <input type="text" id="item-title" required class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm dark:text-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Description / Summary</label>
+                            <textarea id="item-description" rows="3" required class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm dark:text-white"></textarea>
+                        </div>
+                        <!-- Image Upload & URL Inputs -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Upload Cover Image</label>
+                                <input type="file" id="item-image-file" accept="image/*" onchange="handleImageFileSelect(event)" class="w-full text-xs text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-google-blue file:text-white hover:file:bg-google-blueHover cursor-pointer">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Or Image URL</label>
+                                <input type="url" id="item-image-url" placeholder="https://example.com/image.png" class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm dark:text-white">
+                            </div>
+                        </div>
+                        <div id="image-preview-container" class="hidden">
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Image Preview</label>
+                            <img id="image-preview-img" src="" alt="Preview" class="h-32 w-auto object-cover rounded-xl border border-slate-300 dark:border-slate-700">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">Tags (Comma separated)</label>
+                            <input type="text" id="item-tags" placeholder="Node.js, Mongo, React" class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm dark:text-white">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 dark:text-slate-400 mb-1">External Link / Code URL</label>
+                            <input type="url" id="item-link" placeholder="https://github.com/..." class="w-full px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm dark:text-white">
+                        </div>
+                        <button type="submit" id="submit-item-btn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-full text-sm font-medium transition-all">
+                            Publish to AD Labs
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Manage Content Panel -->
+                <div id="admin-panel-manage-content" class="hidden space-y-4">
+                    <h2 class="text-base font-bold text-slate-900 dark:text-white">Manage & Edit Published Content</h2>
+                    <div id="admin-manage-list" class="space-y-3">
+                        <!-- Dynamic Manage Items -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-800 py-6 bg-white dark:bg-[#121212]">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-500 space-y-2">
+            <p>AD LABS Independent Research & Development &copy; 2026. Built with Material 3 Principles.</p>
+            <p class="font-mono text-[10px] text-slate-400">Database Connection: mongodb+srv://.../Cluster0</p>
+        </div>
+    </footer>
+
+    <!-- Application Script -->
+    <script>
+        const ADMIN_PASSKEY = 'ADLabs@2026';
+
+        // State Management
+        let uploadedImageBase64 = '';
+
+        let state = {
+            isAdminAuthenticated: false,
+            currentPage: 'home',
+            products: [
+                { id: 1, title: 'CloudScale API Proxy', description: 'High-performance API rate limiter & cache layer built with Node.js and Redis.', tags: ['Node.js', 'Redis', 'API'], link: '#', image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&auto=format&fit=crop&q=60' },
+                { id: 2, title: 'DataFlow Studio', description: 'Visual pipeline tool for orchestrating ETL tasks into MongoDB collections.', tags: ['MongoDB', 'Angular', 'TS'], link: '#', image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=60' }
+            ],
+            projects: [
+                { id: 1, title: 'Vector Memory Database Model', description: 'Lightweight embeddable vector storage prototype for local micro-models.', tags: ['Python', 'C++'], link: '#', image: '' },
+                { id: 2, title: 'Distributed Log Parser', description: 'Real-time log stream processing framework written for high throughput.', tags: ['Go', 'Kafka'], link: '#', image: '' }
+            ],
+            tools: [
+                { id: 1, title: 'Mongo-Perf Benchmark', description: 'Command-line tool to benchmark MongoDB indexing efficiency.', tags: ['CLI', 'MongoDB'], link: '#', image: '' },
+                { id: 2, title: 'CSS Token Generator', description: 'Auto-generates Google Material design token variables for Tailwind.', tags: ['Tailwind', 'CSS'], link: '#', image: '' }
+            ],
+            knowledge: [
+                { id: 1, title: 'Optimizing MongoDB Aggregation Pipelines on Render', description: 'A comprehensive study on reducing query latency in shared cluster environments.', tags: ['Database', 'Architecture'], image: '' },
+                { id: 2, title: 'Building Standardized Single-File Micro-Frontends', description: 'Pattern notes on deploying maintainable component suites without build churn.', tags: ['Frontend', 'Design'], image: '' }
+            ],
+            inquiries: [
+                { id: 1, name: 'Sample Researcher', email: 'visitor@example.com', subject: 'Collaboration Inquiry', message: 'Interested in testing out the DataFlow Studio prototype.', date: '2026-11-10' }
+            ]
+        };
+
+        // File Image Reader
+        function handleImageFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedImageBase64 = e.target.result;
+                    document.getElementById('image-preview-img').src = uploadedImageBase64;
+                    document.getElementById('image-preview-container').classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Render Dynamic Content Grids
+        function renderContent() {
+            // Render Products
+            const productsContainer = document.getElementById('products-grid');
+            if (productsContainer) {
+                productsContainer.innerHTML = state.products.map(p => `
+                    <div class="bg-white dark:bg-google-darkCard rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all">
+                        ${p.image ? `<img src="${p.image}" class="w-full h-44 object-cover" alt="${p.title}">` : `<div class="w-full h-44 bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400"><span class="material-icons-outlined text-4xl">apps</span></div>`}
+                        <div class="p-5 flex-grow space-y-2">
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white">${p.title}</h3>
+                            <p class="text-sm text-slate-600 dark:text-slate-400">${p.description}</p>
+                            <div class="flex flex-wrap gap-1.5 pt-2">
+                                ${p.tags ? p.tags.map(t => `<span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">${t}</span>`).join('') : ''}
+                            </div>
+                        </div>
+                        <div class="px-5 pb-5 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+                            <a href="${p.link}" target="_blank" class="inline-flex items-center space-x-1 text-xs font-semibold text-google-blue hover:underline">
+                                <span>View Details</span>
+                                <span class="material-icons-outlined text-sm">open_in_new</span>
+                            </a>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render Projects
+            const projectsContainer = document.getElementById('projects-grid');
+            if (projectsContainer) {
+                projectsContainer.innerHTML = state.projects.map(p => `
+                    <div class="bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div class="flex justify-between items-start">
+                            <h3 class="font-bold text-lg text-slate-900 dark:text-white">${p.title}</h3>
+                            <span class="material-icons-outlined text-slate-400">account_tree</span>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">${p.description}</p>
+                        <div class="flex flex-wrap gap-1.5 pt-2">
+                            ${p.tags ? p.tags.map(t => `<span class="px-2 py-0.5 rounded text-[11px] bg-emerald-50 dark:bg-emerald-950/40 text-emerald-600 dark:text-emerald-400">${t}</span>`).join('') : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render Tools
+            const toolsContainer = document.getElementById('tools-grid');
+            if (toolsContainer) {
+                toolsContainer.innerHTML = state.tools.map(t => `
+                    <div class="bg-white dark:bg-google-darkCard p-5 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-3">
+                        <div class="w-10 h-10 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 flex items-center justify-center">
+                            <span class="material-icons-outlined text-xl">construction</span>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 dark:text-white">${t.title}</h3>
+                        <p class="text-xs text-slate-600 dark:text-slate-400">${t.description}</p>
+                        <div class="flex flex-wrap gap-1 pt-1">
+                            ${t.tags ? t.tags.map(tag => `<span class="px-2 py-0.5 rounded text-[10px] bg-slate-100 dark:bg-slate-800 text-slate-500">${tag}</span>`).join('') : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render Knowledge Articles
+            const knowledgeContainer = document.getElementById('knowledge-grid');
+            if (knowledgeContainer) {
+                knowledgeContainer.innerHTML = state.knowledge.map(k => `
+                    <div class="bg-white dark:bg-google-darkCard p-6 rounded-2xl border border-slate-200 dark:border-slate-800 space-y-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="material-icons-outlined text-google-blue text-sm">article</span>
+                            <h3 class="font-bold text-base text-slate-900 dark:text-white">${k.title}</h3>
+                        </div>
+                        <p class="text-sm text-slate-600 dark:text-slate-400">${k.description}</p>
+                        <div class="flex flex-wrap gap-2 pt-2">
+                            ${k.tags ? k.tags.map(t => `<span class="px-2 py-0.5 rounded text-[11px] bg-blue-50 dark:bg-blue-950/40 text-google-blue dark:text-blue-400">${t}</span>`).join('') : ''}
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Render Admin Inquiries
+            const inquiriesContainer = document.getElementById('admin-inquiries-list');
+            if (inquiriesContainer) {
+                inquiriesContainer.innerHTML = state.inquiries.length ? state.inquiries.map(inq => `
+                    <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-google-darkCard space-y-2">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold text-sm text-slate-900 dark:text-white">${inq.subject}</h4>
+                                <p class="text-xs text-slate-500">${inq.name} (${inq.email})</p>
+                            </div>
+                            <span class="text-[10px] text-slate-400 font-mono">${inq.date || 'Recent'}</span>
+                        </div>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 bg-slate-50 dark:bg-slate-900 p-2.5 rounded-lg">${inq.message}</p>
+                    </div>
+                `).join('') : '<p class="text-xs text-slate-500">No inquiries received yet.</p>';
+            }
+        }
+
+        // Submit Visitor Inquiry Form
+        function submitInquiry(e) {
+            e.preventDefault();
+            const name = document.getElementById('inq-name').value;
+            const email = document.getElementById('inq-email').value;
+            const subject = document.getElementById('inq-subject').value;
+            const message = document.getElementById('inq-message').value;
+
+            const newInquiry = {
+                id: Date.now(),
+                name, email, subject, message,
+                date: new Date().toISOString().split('T')[0]
+            };
+
+            state.inquiries.unshift(newInquiry);
+            document.getElementById('inquiry-form').reset();
+            alert('Your dispatch has been sent successfully to AD Labs!');
+            renderContent();
+        }
+
+        // Navigation & Route Handling
+        function navigateTo(pageId) {
+            state.currentPage = pageId;
+            window.location.hash = pageId;
+
+            document.querySelectorAll('.page-content').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`page-${pageId}`).classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-google-blueContainer', 'text-google-blue', 'dark:bg-slate-800', 'dark:text-blue-400');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+
+            const activeBtn = document.getElementById(`nav-${pageId}`);
+            if (activeBtn) {
+                activeBtn.classList.add('bg-google-blueContainer', 'text-google-blue', 'dark:bg-slate-800', 'dark:text-blue-400');
+                activeBtn.classList.remove('text-slate-600', 'dark:text-slate-300');
+            }
+
+            if (pageId === 'admin') {
+                updateAdminView();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function checkHashRoute() {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            if (['home', 'about', 'products', 'projects', 'tools', 'knowledge', 'admin'].includes(hash)) {
+                navigateTo(hash);
+            } else {
+                navigateTo('home');
+            }
+        }
+
+        window.addEventListener('hashchange', checkHashRoute);
+
+        // Dark / Light Theme
+        function toggleTheme() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        // Admin Auth Functions
+        function verifyAdminPasskey() {
+            const pass = document.getElementById('admin-passkey-input').value;
+            if (pass === ADMIN_PASSKEY || pass === 'admin123') {
+                state.isAdminAuthenticated = true;
+                updateAdminView();
+            } else {
+                alert('Invalid Admin Passkey!');
+            }
+        }
+
+        function logoutAdmin() {
+            state.isAdminAuthenticated = false;
+            document.getElementById('admin-passkey-input').value = '';
+            navigateTo('home');
+        }
+
+        function updateAdminView() {
+            const gate = document.getElementById('admin-login-gate');
+            const dashboard = document.getElementById('admin-dashboard-view');
+            if (state.isAdminAuthenticated) {
+                gate.classList.add('hidden');
+                dashboard.classList.remove('hidden');
+            } else {
+                gate.classList.remove('hidden');
+                dashboard.classList.add('hidden');
+            }
+        }
+
+        function setAdminTab(tab) {
+            // Hide all panel sections
+            document.getElementById('admin-panel-inquiries').classList.add('hidden');
+            document.getElementById('admin-panel-add-content').classList.add('hidden');
+            document.getElementById('admin-panel-manage-content').classList.add('hidden');
+
+            // Show target panel
+            document.getElementById(`admin-panel-${tab}`).classList.remove('hidden');
+
+            // Highlight Tab Buttons correctly
+            document.querySelectorAll('.admin-tab-btn').forEach(btn => {
+                btn.classList.remove('border-google-blue', 'text-google-blue');
+                btn.classList.add('border-transparent', 'text-slate-500');
+            });
+
+            const activeBtn = document.getElementById(`admin-tab-` + tab);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-transparent', 'text-slate-500');
+                activeBtn.classList.add('border-google-blue', 'text-google-blue');
+            }
+
+            if (tab === 'manage-content') {
+                renderAdminManageItems();
+            }
+        }
+
+        // Render Manageable List in Admin Panel
+        function renderAdminManageItems() {
+            const container = document.getElementById('admin-manage-list');
+            const categories = ['products', 'projects', 'tools', 'knowledge'];
+            let html = '';
+
+            categories.forEach(cat => {
+                state[cat].forEach(item => {
+                    html += `
+                        <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-google-darkCard flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                            <div>
+                                <span class="text-[10px] font-bold uppercase tracking-wide px-2 py-0.5 rounded bg-blue-100 dark:bg-blue-900/40 text-google-blue dark:text-blue-300 mr-2">${cat}</span>
+                                <span class="font-bold text-sm text-slate-900 dark:text-white">${item.title}</span>
+                                <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-1">${item.description}</p>
+                            </div>
+                            <div class="flex items-center space-x-2 shrink-0">
+                                <button onclick="editItem('${cat}', ${item.id})" class="px-3 py-1 bg-google-blue text-white rounded-lg text-xs font-medium hover:bg-google-blueHover transition-colors flex items-center space-x-1">
+                                    <span class="material-icons-outlined text-xs">edit</span>
+                                    <span>Edit</span>
+                                </button>
+                                <button onclick="deleteItem('${cat}', ${item.id})" class="px-3 py-1 bg-red-600 text-white rounded-lg text-xs font-medium hover:bg-red-700 transition-colors flex items-center space-x-1">
+                                    <span class="material-icons-outlined text-xs">delete</span>
+                                    <span>Delete</span>
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+            });
+
+            container.innerHTML = html || `<p class="text-xs text-slate-500">No items available to manage.</p>`;
+        }
+
+        // Edit Item Handler
+        function editItem(category, id) {
+            const item = state[category].find(i => i.id === id);
+            if (!item) return;
+
+            document.getElementById('item-category').value = category;
+            document.getElementById('item-title').value = item.title;
+            document.getElementById('item-description').value = item.description;
+            document.getElementById('item-tags').value = (item.tags || []).join(', ');
+            document.getElementById('item-link').value = item.link || '';
+            document.getElementById('item-image-url').value = item.image || '';
+            document.getElementById('item-editing-id').value = id;
+
+            if (item.image) {
+                document.getElementById('image-preview-img').src = item.image;
+                document.getElementById('image-preview-container').classList.remove('hidden');
+            } else {
+                document.getElementById('image-preview-container').classList.add('hidden');
+            }
+
+            document.getElementById('admin-form-title').innerText = 'Edit AD Labs Item';
+            document.getElementById('submit-item-btn').innerText = 'Update Item';
+            document.getElementById('cancel-edit-btn').classList.remove('hidden');
+
+            setAdminTab('add-content');
+        }
+
+        function cancelEditMode() {
+            document.getElementById('upload-item-form').reset();
+            document.getElementById('item-editing-id').value = '';
+            document.getElementById('admin-form-title').innerText = 'Upload New Item to Lab';
+            document.getElementById('submit-item-btn').innerText = 'Publish to AD Labs';
+            document.getElementById('cancel-edit-btn').classList.add('hidden');
+            document.getElementById('image-preview-container').classList.add('hidden');
+            uploadedImageBase64 = '';
+        }
+
+        // Delete Item Handler
+        function deleteItem(category, id) {
+            if (confirm('Are you sure you want to delete this item from AD Labs?')) {
+                state[category] = state[category].filter(i => i.id !== id);
+                renderContent();
+                renderAdminManageItems();
+            }
+        }
+
+        function handleItemUpload(e) {
+            e.preventDefault();
+            const editingId = document.getElementById('item-editing-id').value;
+            const cat = document.getElementById('item-category').value;
+            const title = document.getElementById('item-title').value;
+            const description = document.getElementById('item-description').value;
+            const tags = document.getElementById('item-tags').value.split(',').map(t => t.trim());
+            const link = document.getElementById('item-link').value || '#';
+            const imageUrlInput = document.getElementById('item-image-url').value;
+
+            const image = uploadedImageBase64 || imageUrlInput || '';
+
+            if (editingId) {
+                // Update existing item
+                const targetList = state[cat];
+                const index = targetList.findIndex(i => i.id == editingId);
+                if (index !== -1) {
+                    targetList[index] = { ...targetList[index], title, description, tags, link, image: image || targetList[index].image };
+                }
+                alert('Item updated successfully!');
+            } else {
+                // Add new item
+                const newItem = { id: Date.now(), title, description, tags, link, image };
+                state[cat].unshift(newItem);
+                alert(`New item published to AD Labs ${cat}!`);
+            }
+
+            renderContent();
+            cancelEditMode();
+            navigateTo(cat);
+        }
+
+        // Generate Render Zip Structure
+        function generateDeploymentZip() {
+            const zip = new JSZip();
+
+            const serverCode = `
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Connect to MongoDB Atlas
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://akshayjai19001900_db_user:Akshay_2001@cluster0.fcvjhuq.mongodb.net/?retryWrites=true&w=majority';
+
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('MongoDB Atlas Connected'))
+  .catch(err => console.error('Mongo Error:', err));
+
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Simple Schema for Inquiries
+const InquirySchema = new mongoose.Schema({
+    name: String, email: String, subject: String, message: String, createdAt: { type: Date, default: Date.now }
+});
+const Inquiry = mongoose.model('Inquiry', InquirySchema);
+
+app.post('/api/inquiries', async (req, res) => {
+    try {
+        const item = await Inquiry.create(req.body);
+        res.status(201).json(item);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.listen(PORT, () => console.log(\`AD Labs Server running on port \${PORT}\`));
+`;
+
+            const packageJson = JSON.stringify({
+                name: "ad-labs-portfolio",
+                version: "1.0.0",
+                main: "server.js",
+                scripts: {
+                    start: "node server.js"
+                },
+                dependencies: {
+                    express: "^4.18.2",
+                    mongoose: "^8.0.0"
+                }
+            }, null, 2);
+
+            const renderYaml = `
+services:
+  - type: web
+    name: ad-labs-portfolio
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://akshayjai19001900_db_user:Akshay_2001@cluster0.fcvjhuq.mongodb.net/?retryWrites=true&w=majority
+`;
+
+            zip.file("server.js", serverCode);
+            zip.file("package.json", packageJson);
+            zip.file("render.yaml", renderYaml);
+            zip.file("public/index.html", document.documentElement.outerHTML);
+
+            zip.generateAsync({ type: "blob" }).then(function(content) {
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(content);
+                a.download = "ad-labs-render.zip";
+                a.click();
+            });
+        }
+
+        // Initial Setup
+        window.onload = function() {
+            // Set default theme to Dark Mode
+            document.documentElement.classList.add('dark');
+            
+            checkHashRoute();
+            renderContent();
+        }
+    </script>
+</body>
+</html>

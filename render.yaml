@@ -1,0 +1,10 @@
+
+services:
+  - type: web
+    name: ad-labs-portfolio
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: MONGO_URI
+        value: mongodb+srv://akshayjai19001900_db_user:Akshay_2001@cluster0.fcvjhuq.mongodb.net/?retryWrites=true&w=majority
